@@ -87,7 +87,9 @@ pipeline{
                     def uploadUrl = "${artifactoryUrl}/${repoName}/${targetPath}/$(basename ${localArtifactPath})"
 
                     // Upload the artifact using curl
-                    def uploadCommand = """curl -X PUT -u ${apiKeyOrUsername}:${apiKeyOrPassword} -T ${localArtifactPath} ${uploadUrl}"""
+                    def uploadCommand = """
+                        curl -X PUT -u ${apiKeyOrUsername}:${apiKeyOrPassword} -T ${localArtifactPath} ${uploadUrl}
+                    """
                     def uploadResult = sh(script: uploadCommand, returnStatus: true)
 
                     if (uploadResult == 0) {
