@@ -87,7 +87,7 @@ pipeline{
                     def fileName = localArtifactPath.split('/').last()
 
                     // Construct the full URL to upload the artifact
-                    def uploadUrl = "${artifactoryUrl}/${repoName}/${targetPath}/$(basename ${localArtifactPath})"
+                    def uploadUrl = "{${artifactoryUrl}/${repoName}/${targetPath}/$(basename ${localArtifactPath}})"
 
                     // Upload the artifact using curl
                     def uploadCommand = """
