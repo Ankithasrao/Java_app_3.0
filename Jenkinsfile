@@ -83,6 +83,9 @@ pipeline{
                     def apiKeyOrUsername = 'admin'
                     def apiKeyOrPassword = 'Password@123'
 
+                       // Extract the filename from the localArtifactPath
+                    def fileName = localArtifactPath.split('/').last()
+
                     // Construct the full URL to upload the artifact
                     def uploadUrl = "${artifactoryUrl}/${repoName}/${targetPath}/$(basename ${localArtifactPath})"
 
