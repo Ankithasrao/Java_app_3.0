@@ -72,7 +72,7 @@ pipeline{
                }
             }
         }
-        stage('Build and Add Artifact to the repo : JFrog') {
+        /*stage('Build and Add Artifact to the repo : JFrog') {
             steps {
                 script {
                     // Artifactory configuration
@@ -102,7 +102,7 @@ pipeline{
                     }
                 }
             }
-        }
+        }*/
         stage('Docker Image Build'){
          when { expression {  params.action == 'create' } }
             steps{
