@@ -72,13 +72,30 @@ pipeline{
                }
             }
         }
-        stage('Upload an artifact to Jfrog'){
-         when { expression {  params.action == 'create' } }
-            steps{
-               script{
-                   
-                 
-               }
+        stage('Build and Add Artifact to the repo : JFrog') {
+            steps {
+                script {
+                    // Artifactory configuration
+                    def artifactoryUrl = 'http://18.204.16.85:8081/artifactory'
+                    def repoName = 'example-repo-local'
+                    def targetPath = 'http://18.204.16.85:8082/artifactory/example-repo-local/kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar'
+                    def localArtifactPath = 'kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar'
+                    def apiKeyOrUsername = 'admin'
+                    def apiKeyOrPassword = 'Password@123'
+
+                    // Construct the full URL to upload the artifact
+                    def uploadUrl = "${artifactoryUrl}/${repoName}/${targetPath}/$(basename ${localArtifactPath})"
+
+                    // Upload the artifact using curl
+                    def uploadCommand = """curl -X PUT -u ${apiKeyOrUsername}:${apiKeyOrPassword} -T ${localArtifactPath} ${uploadUrl}"""
+                    def uploadResult = sh(script: uploadCommand, returnStatus: true)
+
+                    if (uploadResult == 0) {
+                        echo "Artifact successfully uploaded to Artifactory."
+                    } else {
+                        error "Failed to upload artifact to Artifactory. Exit code: ${uploadResult}"
+                    }
+                }
             }
         }
         stage('Docker Image Build'){
