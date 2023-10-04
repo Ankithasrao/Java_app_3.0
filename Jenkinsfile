@@ -87,11 +87,11 @@ pipeline{
                     def fileName = localArtifactPath.split('/').last()
 
                     // Construct the full URL to upload the artifact
-                    def uploadUrl = "{${artifactoryUrl}/${repoName}/${targetPath}/$(basename ${localArtifactPath}})"
+                    def uploadUrl = "${artifactoryUrl}/${repoName}/${targetPath}/${fileName}"
 
                     // Upload the artifact using curl
                     def uploadCommand = """
-                        curl -X PUT -u ${apiKeyOrUsername}:${apiKeyOrPassword} -T ${localArtifactPath} ${uploadUrl}
+                        curl -X PUT -u ${apiKeyOrUsername}:${apiKeyOrPassword} -T ${localArtifactPath} \${uploadUrl}
                     """
                     def uploadResult = sh(script: uploadCommand, returnStatus: true)
 
