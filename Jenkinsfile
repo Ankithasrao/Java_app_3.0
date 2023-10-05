@@ -78,7 +78,7 @@ pipeline{
                     // Artifactory configuration
                     def artifactoryUrl = 'http://44.202.242.34:8081/artifactory'
                     def repoName = 'example-repo-local'
-                    def targetPath = 'http://44.202.242.34:8081/artifactory/example-repo-local/kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar'
+                    def targetPath = 'kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar'
                     def localArtifactPath = '/var/lib/jenkins/.m2/repository/com/minikube/sample/kubernetes-configmap-reload/0.0.1-SNAPSHOT/kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar'
                     def apiKeyOrUsername = 'admin'
                     def apiKeyOrPassword = 'Password@123'
