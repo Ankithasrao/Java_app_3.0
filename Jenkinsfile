@@ -91,7 +91,7 @@ pipeline{
 
                     // Upload the artifact using curl
                     def uploadCommand = """
-                        curl -X PUT -u ${apiKeyOrUsername}:${apiKeyOrPassword} -T ${localArtifactPath} \${uploadUrl}
+                        curl -X PUT -u ${apiKeyOrUsername}:${apiKeyOrPassword} -T ${localArtifactPath} ${uploadUrl}
                     """
                     def uploadResult = sh(script: uploadCommand, returnStatus: true)
 
